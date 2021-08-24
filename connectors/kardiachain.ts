@@ -3,10 +3,10 @@ import LockConnector from '../src/connector';
 export default class Connector extends LockConnector {
   async connect() {
     let provider;
-    if (window['ethereum']) {
-      provider = window['ethereum'];
+    if (window['kardiachain']) {
+      provider = window['kardiachain'];
       try {
-        await window['ethereum'].enable();
+        await window['kardiachain'].enable();
       } catch (e) {
         console.error(e);
         if (e.code === 4001) return;
@@ -16,11 +16,11 @@ export default class Connector extends LockConnector {
     }
     return provider;
   }
-1
+
   async isLoggedIn() {
-    if (!window['ethereum']) return false;
-    if (window['ethereum'].selectedAddress) return true;
+    if (!window['kardiachain']) return false;
+    if (window['kardiachain'].selectedAddress) return true;
     await new Promise((r) => setTimeout(r, 400));
-    return !!window['ethereum'].selectedAddress;
+    return !!window['kardiachain'].selectedAddress;
   }
 }
